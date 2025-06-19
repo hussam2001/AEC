@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects - AEC | Advanced Engineering Consultants</title>
+    <meta name="description" content="Explore AEC's portfolio of successful engineering and architectural projects across industrial, commercial, and infrastructure sectors in Oman and beyond.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(162, 14, 32, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #a20e20;
+            font-family: 'Playfair Display', serif;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #a20e20;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a20e20;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after, .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); }
+        .hero-slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); }
+        .hero-slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(162, 14, 32, 0.85), rgba(130, 11, 26, 0.7));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 3rem 2rem 1rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: white;
+            color: #666;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #a20e20;
+            color: white;
+            border-color: #a20e20;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+            border-top: 4px solid #a20e20;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #a20e20;
+            display: block;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: #a20e20;
+            margin-bottom: 1rem;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #a20e20, #820b1a);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(162, 14, 32, 0.9), rgba(130, 11, 26, 0.8));
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2.5rem 2rem;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #a20e20, #820b1a);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .project-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 400;
+        }
+
+        .project-value {
+            font-weight: 700;
+            color: #a20e20;
+            font-size: 1.2rem;
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Featured Project Section */
+        .featured-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .featured-project {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .featured-content h2 {
+            font-size: 2.5rem;
+            color: #a20e20;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .featured-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .featured-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .featured-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .featured-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #a20e20;
+            display: block;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .featured-stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .featured-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .featured-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #a20e20, #820b1a);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #a20e20;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #a20e20;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #a20e20;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #a20e20;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: #95a5a6;
+            font-weight: 300;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-project {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .featured-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                AEC
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slideshow">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Our Projects</h1>
+            <p>Engineering excellence delivered across diverse sectors and challenging environments</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section" style="display: none;">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="industrial">Industrial</button>
+                <button class="filter-btn" data-filter="commercial">Commercial</button>
+                <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+                <button class="filter-btn" data-filter="warehouse">Warehousing</button>
+                <button class="filter-btn" data-filter="defense">Defense</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid fade-in">
+                <div class="stat-item">
+                    <span class="stat-number">250+</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$500M+</span>
+                    <span class="stat-label">Total Project Value</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Industry Sectors</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Project -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-project fade-in">
+                <div class="featured-content">
+                    <h2>Featured Project: L&T Heavy Fabrication</h2>
+                    <p>Our flagship industrial project showcasing advanced engineering solutions for heavy fabrication facilities. This state-of-the-art facility represents our commitment to delivering world-class infrastructure that meets the highest international standards.</p>
+                    <div class="featured-stats">
+                        <div class="featured-stat">
+                            <span class="featured-stat-number">14,203</span>
+                            <span class="featured-stat-label">SqM Area</span>
+                        </div>
+                        <div class="featured-stat">
+                            <span class="featured-stat-number">$26.5M</span>
+                            <span class="featured-stat-label">Project Value</span>
+                        </div>
+                        <div class="featured-stat">
+                            <span class="featured-stat-number">18</span>
+                            <span class="featured-stat-label">Months Duration</span>
+                        </div>
+                        <div class="featured-stat">
+                            <span class="featured-stat-number">200t</span>
+                            <span class="featured-stat-label">Crane Capacity</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-image">
+                    <img src="images/industrial.jpg" alt="L&T Heavy Fabrication Facility">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Project Portfolio</h2>
+                <p>Explore our diverse portfolio of successful projects across multiple industries and sectors</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-section" style="padding: 2rem 0 3rem; background: transparent;">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="industrial">Industrial</button>
+                    <button class="filter-btn" data-filter="commercial">Commercial</button>
+                    <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+                    <button class="filter-btn" data-filter="warehouse">Warehousing</button>
+                    <button class="filter-btn" data-filter="defense">Defense</button>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                <!-- L&T Heavy Fabrication -->
+                <div class="project-card fade-in" data-category="industrial">
+                    <div class="project-image" style="background-image: url('images/industrial.jpg');">
+                        <div class="project-overlay">Heavy Fabrication Facility for Industrial Manufacturing</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Industrial Manufacturing</div>
+                        <h3 class="project-title">L&T Heavy Fabrication</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Muscat, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">14,203 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Sector:</span>
+                                <span class="detail-value">Heavy Industry</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $26.5 Million</div>
+                    </div>
+                </div>
+
+                <!-- Al Jazeera Steel -->
+                <div class="project-card fade-in" data-category="industrial">
+                    <div class="project-image" style="background-image: url('images/industrial2.jpg');">
+                        <div class="project-overlay">Steel Manufacturing Plant with Advanced Processing Equipment</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Steel Industry</div>
+                        <h3 class="project-title">Al Jazeera Steel Products</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Muscat, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">30,277 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Capacity:</span>
+                                <span class="detail-value">300,000mt Annual</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $16 Million</div>
+                    </div>
+                </div>
+
+                <!-- Al Seer Warehouse -->
+                <div class="project-card fade-in" data-category="warehouse">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <div class="project-overlay">Automated Warehouse with Modern Racking Systems</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Warehousing & Logistics</div>
+                        <h3 class="project-title">Al Seer Barka Warehouse</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Barka, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">12,652 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Features:</span>
+                                <span class="detail-value">3PL Facility</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $10 Million</div>
+                    </div>
+                </div>
+
+                <!-- RGO Bunker -->
+                <div class="project-card fade-in" data-category="defense">
+                    <div class="project-image" style="background-image: url('images/bunker.jpg');">
+                        <div class="project-overlay">Defense Infrastructure with Specialized Security Features</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Defense</div>
+                        <h3 class="project-title">RGO Bunker Project</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Halban, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">2,211 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Type:</span>
+                                <span class="detail-value">Secure Storage</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $9.5 Million</div>
+                    </div>
+                </div>
+
+                <!-- Id Tech Industrial -->
+                <div class="project-card fade-in" data-category="industrial">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <div class="project-overlay">Industrial Facility with Maintenance & Inspection Services</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Industrial Services</div>
+                        <h3 class="project-title">Id Tech Industrial Facility</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Muscat, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">9,461 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Services:</span>
+                                <span class="detail-value">Maintenance Hub</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $6.2 Million</div>
+                    </div>
+                </div>
+
+                <!-- Oman Flour Mills -->
+                <div class="project-card fade-in" data-category="industrial">
+                    <div class="project-image" style="background-image: url('images/flourmills.jpg');">
+                        <div class="project-overlay">Industrial Bakery with Automated Production Lines</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Food Industry</div>
+                        <h3 class="project-title">Oman Flour Mills Bakery</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Barka, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Built-up Area:</span>
+                                <span class="detail-value">20,882 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Capacity:</span>
+                                <span class="detail-value">24,000 Buns/Hour</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Multi-Million Dollar Project</div>
+                    </div>
+                </div>
+
+                <!-- Hadid Majan Steel -->
+                <div class="project-card fade-in" data-category="industrial">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <div class="project-overlay">Steel Re-Rolling Mill with Advanced Manufacturing Technology</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Steel Manufacturing</div>
+                        <h3 class="project-title">Hadid Majan Steel Mills</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Muscat, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">7,332 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Production:</span>
+                                <span class="detail-value">Rebar Manufacturing</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $2.08 Million</div>
+                    </div>
+                </div>
+
+                <!-- Reem Batteries -->
+                <div class="project-card fade-in" data-category="commercial">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <div class="project-overlay">Modern Administration Building with Professional Office Spaces</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Commercial Building</div>
+                        <h3 class="project-title">Reem Batteries HQ</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Muscat, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">5,165 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Type:</span>
+                                <span class="detail-value">Administration</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $1.5 Million</div>
+                    </div>
+                </div>
+
+                <!-- STS Workshop -->
+                <div class="project-card fade-in" data-category="industrial">
+                    <div class="project-image" style="background-image: url('images/industrial3.jpg');">
+                        <div class="project-overlay">Specialized Workshop Facility for Oil & Gas Maintenance</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Oil & Gas Services</div>
+                        <h3 class="project-title">STS Workshop Facility</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Zawai, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">8,200 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Services:</span>
+                                <span class="detail-value">Maintenance Workshop</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $4.55 Million</div>
+                    </div>
+                </div>
+
+                <!-- ATIFC Ferrochrome -->
+                <div class="project-card fade-in" data-category="industrial">
+                    <div class="project-image" style="background-image: url('images/industrial4.jpg');">
+                        <div class="project-overlay">Ferrochrome Processing Plant with Advanced Metallurgy</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Metallurgy</div>
+                        <h3 class="project-title">ATIFC Ferrochrome Plant</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Sohar, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Capacity:</span>
+                                <span class="detail-value">75,000 MTPA</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Features:</span>
+                                <span class="detail-value">Briquetting Plant</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Major Industrial Project</div>
+                    </div>
+                </div>
+
+                <!-- USG Quarry -->
+                <div class="project-card fade-in" data-category="infrastructure">
+                    <div class="project-image" style="background-image: url('images/mining.jpg');">
+                        <div class="project-overlay">Mining Infrastructure with Processing Equipment</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Mining</div>
+                        <h3 class="project-title">USG Zawai Quarry</h3>
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Zawai, Oman</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Area:</span>
+                                <span class="detail-value">3,202 SqM</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="detail-label">Sector:</span>
+                                <span class="detail-value">Mining Operations</span>
+                            </div>
+                        </div>
+                        <div class="project-value">Project Value: $3.15 Million</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Next Project?</h2>
+                <p>Join our growing list of satisfied clients and experience the AEC difference in engineering excellence and project delivery.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-primary">Discuss Your Project</a>
+                    <a href="services.html" class="btn-secondary">Our Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>📧 info@aecme.net</p>
+                <p>📞 00968 99775991</p>
+                <p>📞 00968 93072959</p>
+                <p>📍 Muscat, Sultanate of Oman</p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p><a href="services.html#design">Architecture Design</a></p>
+                <p><a href="services.html#structural">Structural Engineering</a></p>
+                <p><a href="services.html#management">Project Management</a></p>
+                <p><a href="services.html#mep">MEP Engineering</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Sectors</h3>
+                <p><a href="#industrial">Industrial & Manufacturing</a></p>
+                <p><a href="#oil-gas">Oil & Gas</a></p>
+                <p><a href="#warehousing">Warehousing & Logistics</a></p>
+                <p><a href="#infrastructure">Infrastructure</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <p><a href="#about">About AEC</a></p>
+                <p><a href="#team">Our Team</a></p>
+                <p><a href="projects.html">Portfolio</a></p>
+                <p><a href="#careers">Career Opportunities</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Advanced Engineering Consultants (AEC). All rights reserved. | Design Beyond Borders</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hero slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 4000);
+
+        // Project filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Project card hover effects
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
